@@ -212,12 +212,13 @@ html[lang="th"] blockquote {
 
 .nav-toggle {
   display: none;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(20, 24, 33, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
   padding: 0.4rem 0.7rem;
   border-radius: 8px;
   font: inherit;
+  font-weight: 600;
 }
 
 /* Page headers that aren't over a photo hero */
@@ -232,6 +233,12 @@ html[lang="th"] blockquote {
 .site-header.on-light .brand,
 .site-header.on-light .nav-links a {
   color: var(--ink);
+}
+
+.site-header.on-light .nav-toggle {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
 }
 
 .site-header.on-light .nav-links a:hover {
@@ -911,17 +918,27 @@ h1, h2, h3 {
 
   .nav-toggle {
     display: inline-flex;
+    align-items: center;
+    order: 3;
+    margin-left: 0.45rem;
+    flex-shrink: 0;
+  }
+
+  .lang-switch {
+    order: 2;
     margin-left: auto;
+    margin-right: 0;
   }
 
   .nav-links {
     display: none;
     position: absolute;
     top: calc(100% + 0.35rem);
-    right: 4.75rem;
+    right: 0;
     left: auto;
     margin: 0;
     min-width: 220px;
+    max-width: min(280px, calc(100vw - 2rem));
     background: var(--ink);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 16px;
@@ -929,16 +946,26 @@ h1, h2, h3 {
     flex-direction: column;
     align-items: stretch;
     gap: 0.75rem;
+    z-index: 50;
   }
 
   .nav-links.open {
     display: flex;
   }
 
+  .nav-links a {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .nav-links a:hover {
+    color: var(--gold-soft);
+  }
+
   .nav-links a.is-active,
   .nav-links a[aria-current="page"] {
     padding-left: 0.55rem;
     border-left: 3px solid var(--gold);
+    color: #fff;
   }
 
   .nav-links a.is-active::after,
@@ -948,15 +975,22 @@ h1, h2, h3 {
 
   .site-header.on-light .nav-links a.is-active,
   .site-header.on-light .nav-links a[aria-current="page"] {
-    border-left-color: var(--lacquer);
+    border-left-color: var(--gold);
+    color: #fff;
   }
 
+  /* Keep the mobile dropdown dark on light pages so links never wash out */
   .site-header.on-light .nav-links {
-    background: #fff;
+    background: var(--ink);
   }
 
-  .lang-switch {
-    margin-left: 0;
+  .site-header.on-light .nav-links a {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .site-header {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 
   .download-panel {

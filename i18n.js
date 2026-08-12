@@ -1,4 +1,4 @@
-/* Thai Recall site strings — EN / TH */
+/* Thai Recall site strings — EN / TH (cache-bust 20260812b) */
 window.TR_I18N = {
   en: {
     'meta.home.title': 'Thai Recall — Free evaluation Android app to recall & speak Thai',
@@ -28,7 +28,7 @@ window.TR_I18N = {
     'home.sellLead': 'When one word disappears mid-chat — at a café, in a taxi, near a temple — Thai Recall helps you find that phrase, hear native audio, repeat it, and continue. Built for expats, partners, and long-term visitors — not for translating every sentence as a beginner tourist.',
     'home.sellP': 'Search → Listen → Repeat → Continue. Offline access to phrases you’ve saved. Optional live lookup when something isn’t in your library yet. Spaced repetition to lock phrases in.',
     'home.buyTag': 'Now available',
-    'home.priceLabel': 'Free evaluation',
+    'home.evalLabel': 'Free evaluation',
     'home.buyMeta': 'Android free evaluation now. Google Play, iOS, and Windows releases planned.',
     'home.buy1': 'Personal phrase library on your phone',
     'home.buy2': 'Listen & speak with one earbud',
@@ -127,7 +127,7 @@ window.TR_I18N = {
     'dl.lead': 'Try Thai Recall free on Android. Keep building your personal Thai library for real conversations.',
     'dl.h2': 'Thai Recall for Android',
     'dl.meta': 'Free evaluation · Android 8.0+ · Designed for single Bluetooth earbud use',
-    'dl.price': 'Free evaluation',
+    'dl.evalLabel': 'Free evaluation',
     'dl.buy': 'Google Play (coming soon)',
     'dl.soon': 'Google Play listing coming soon. Direct APK download is available now for evaluation.',
     'dl.apk': 'Download APK',
@@ -196,7 +196,7 @@ window.TR_I18N = {
     'home.sellLead': 'เมื่อคำหนึ่งหายไปกลางคุย — ที่คาเฟ่ ในแท็กซี่ ใกล้วัด — Thai Recall ช่วยหาวลีนั้น ฟังเสียงเจ้าของภาษา พูดตาม แล้วคุยต่อได้ ออกแบบสำหรับชาวต่างชาติ คู่รัก และผู้มาเยือนระยะยาว — ไม่ใช่สำหรับนักท่องเที่ยวมือใหม่ที่ต้องแปลทุกประโยค',
     'home.sellP': 'ค้นหา → ฟัง → พูดตาม → พูดต่อ เข้าถึงวลีที่บันทึกแบบออฟไลน์ ค้นหาสดเมื่อยังไม่มีในคลัง ทบทวนแบบเว้นระยะเพื่อล็อกความจำ',
     'home.buyTag': 'พร้อมใช้แล้ว',
-    'home.priceLabel': 'ทดลองใช้ฟรี',
+    'home.evalLabel': 'ทดลองใช้ฟรี',
     'home.buyMeta': 'แอนดรอยด์ทดลองใช้ฟรีได้แล้ว มีแผน Google Play, iOS และ Windows',
     'home.buy1': 'คลังวลีส่วนตัวบนมือถือ',
     'home.buy2': 'ฟังและพูดด้วยหูฟังข้างเดียว',
@@ -295,7 +295,7 @@ window.TR_I18N = {
     'dl.lead': 'ทดลองใช้ Thai Recall ฟรีบนแอนดรอยด์ สร้างคลังภาษาไทยส่วนตัวเพื่อบทสนทนาจริง',
     'dl.h2': 'Thai Recall สำหรับแอนดรอยด์',
     'dl.meta': 'ทดลองใช้ฟรี · Android 8.0+ · ออกแบบให้ใช้กับหูฟังบลูทูธข้างเดียว',
-    'dl.price': 'ทดลองใช้ฟรี',
+    'dl.evalLabel': 'ทดลองใช้ฟรี',
     'dl.buy': 'Google Play (เร็ว ๆ นี้)',
     'dl.soon': 'หน้าร้าน Google Play จะพร้อมเร็ว ๆ นี้ ขณะนี้ดาวน์โหลด APK เพื่อทดลองใช้ได้แล้ว',
     'dl.apk': 'ดาวน์โหลด APK',

@@ -98,24 +98,51 @@
     nodes.forEach(function (n) { io.observe(n); });
   }
 
+  function isAndroidDevice() {
+    var ua = navigator.userAgent || '';
+    // Android phones/tablets only — not desktop browsers spoofing lightly via "Android" alone with Windows
+    return /Android/i.test(ua);
+  }
+
+  function setDisabled(el, disabled) {
+    if (!el) return;
+    if (disabled) {
+      el.classList.add('is-disabled');
+      el.setAttribute('aria-disabled', 'true');
+      el.addEventListener('click', blockDisabledClick);
+    } else {
+      el.classList.remove('is-disabled');
+      el.removeAttribute('aria-disabled');
+      el.removeEventListener('click', blockDisabledClick);
+    }
+  }
+
+  function blockDisabledClick(e) {
+    var el = e.currentTarget;
+    if (el && el.getAttribute('aria-disabled') === 'true') {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }
+
   function wireDownloadLinks() {
     var cfg = window.TR_SITE || {};
     var play = document.getElementById('btn-play');
     var apk = document.getElementById('btn-apk');
     var playNote = document.getElementById('play-note');
     var apkNote = document.getElementById('apk-note');
+    var androidNote = document.getElementById('android-only-note');
     var apkVer = document.getElementById('apk-version');
     var install = document.getElementById('apk-install');
+    var onAndroid = isAndroidDevice();
 
     if (play && cfg.playStoreUrl) {
       play.setAttribute('href', cfg.playStoreUrl);
       if (cfg.playStoreReady) {
-        play.classList.remove('is-disabled');
-        play.removeAttribute('aria-disabled');
+        setDisabled(play, false);
         if (playNote) playNote.hidden = true;
       } else {
-        play.classList.add('is-disabled');
-        play.setAttribute('aria-disabled', 'true');
+        setDisabled(play, true);
         if (playNote) playNote.hidden = false;
       }
     }
@@ -127,10 +154,27 @@
       } else {
         apk.setAttribute('download', 'ThaiRecall.apk');
       }
-      if (cfg.apkReady) {
-        apk.classList.remove('is-disabled');
-        apk.removeAttribute('aria-disabled');
+
+      if (!cfg.apkReady) {
+        setDisabled(apk, true);
+        if (apkNote) apkNote.hidden = false;
+        if (androidNote) androidNote.hidden = true;
+        if (install) install.hidden = true;
+        if (apkVer) apkVer.hidden = true;
+      } else if (!onAndroid) {
+        // Soft gate: hide/disable APK UI off Android. Direct URL can still be fetched;
+        // real paywall needs a store (Gumroad/Lemon Squeezy/Play).
+        setDisabled(apk, true);
+        apk.removeAttribute('href');
+        apk.removeAttribute('download');
         if (apkNote) apkNote.hidden = true;
+        if (androidNote) androidNote.hidden = false;
+        if (install) install.hidden = true;
+        if (apkVer) apkVer.hidden = true;
+      } else {
+        setDisabled(apk, false);
+        if (apkNote) apkNote.hidden = true;
+        if (androidNote) androidNote.hidden = true;
         if (install) install.hidden = false;
         if (apkVer) {
           if (cfg.apkVersionLabel) {
@@ -140,12 +184,6 @@
             apkVer.hidden = true;
           }
         }
-      } else {
-        apk.classList.add('is-disabled');
-        apk.setAttribute('aria-disabled', 'true');
-        if (apkNote) apkNote.hidden = false;
-        if (install) install.hidden = true;
-        if (apkVer) apkVer.hidden = true;
       }
     }
   }

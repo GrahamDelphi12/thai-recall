@@ -1,3 +1,2 @@
-# Thai Recall
+﻿Thai Recall website — https://thairecall.com
 
-Official website for the Thai Recall Android application.

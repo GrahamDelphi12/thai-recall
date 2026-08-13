@@ -9,7 +9,7 @@ window.TR_SITE = {
   /* Direct APK — signed Release build in Website_Grok/downloads/ */
   apkUrl: 'downloads/ThaiRecall.apk',
   apkReady: true,
-  apkVersionLabel: '13 Aug 2026 (tablet scale)',
+  apkVersionLabel: '13 Aug 2026 (Thai GS)',
 
   supportEmail: 'support@thairecall.com',
   customDomain: 'thairecall.com'

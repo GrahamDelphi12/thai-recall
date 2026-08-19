@@ -343,6 +343,8 @@
 
       if (!cfg.apkReady) {
         setDisabled(apk, true);
+        apk.removeAttribute('href');
+        apk.removeAttribute('download');
         if (apkNote) apkNote.hidden = false;
         if (androidNote) androidNote.hidden = true;
         if (install) install.hidden = true;

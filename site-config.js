@@ -6,10 +6,12 @@ window.TR_SITE = {
   playStoreUrl: 'https://play.google.com/store/apps/details?id=com.thairecall.app',
   playStoreReady: false,
 
-  /* Direct APK — signed Release build in Website_Grok/downloads/ */
+  /* Direct APK
+     Friend testing: set apkReady: true, commit + push (or test locally).
+     Public pause: set apkReady: false (current). Play Store remains preferred. */
   apkUrl: 'downloads/ThaiRecall.apk',
-  apkReady: true,
-  apkVersionLabel: '13 Aug 2026 (Thai GS)',
+  apkReady: false,
+  apkVersionLabel: '',
 
   /* Live RTGS demo (Try it out) — Cloud Run. Redeploy with CORS + EN→TH for production. */
   rtgsApiUrl: 'https://thairecall-rtgs-74012798523.us-central1.run.app/rtgs',

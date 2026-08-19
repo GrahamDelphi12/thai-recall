@@ -8,10 +8,10 @@ window.TR_SITE = {
 
   /* Direct APK
      Friend testing: set apkReady: true, commit + push (or test locally).
-     Public pause: set apkReady: false (current). Play Store remains preferred. */
+     Public pause: set apkReady: false. Play Store remains preferred. */
   apkUrl: 'downloads/ThaiRecall.apk',
-  apkReady: false,
-  apkVersionLabel: '',
+  apkReady: true,
+  apkVersionLabel: '13 Aug 2026 (Thai GS)',
 
   /* Live RTGS demo (Try it out) — Cloud Run. Redeploy with CORS + EN→TH for production. */
   rtgsApiUrl: 'https://thairecall-rtgs-74012798523.us-central1.run.app/rtgs',

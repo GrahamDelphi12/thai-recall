@@ -341,6 +341,9 @@
         apk.setAttribute('download', 'ThaiRecall.apk');
       }
 
+      var maintenance = document.getElementById('download-maintenance');
+      if (maintenance) maintenance.hidden = !!cfg.apkReady;
+
       if (!cfg.apkReady) {
         setDisabled(apk, true);
         apk.removeAttribute('href');

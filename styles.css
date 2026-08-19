@@ -489,7 +489,8 @@ html[lang="th"] blockquote {
 }
 
 .download-note[hidden],
-#apk-install[hidden] {
+#apk-install[hidden],
+#download-maintenance[hidden] {
   display: none !important;
 }
 

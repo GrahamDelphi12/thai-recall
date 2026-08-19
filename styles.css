@@ -826,6 +826,14 @@ h1, h2, h3 {
   word-break: break-word;
 }
 
+.try-result-thai.is-english {
+  font-family: var(--font-display);
+}
+
+#rtgs-block[hidden] {
+  display: none !important;
+}
+
 .try-result-out {
   font-family: var(--font-display);
   font-size: 1.45rem;

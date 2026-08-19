@@ -98,53 +98,91 @@
   function wireTryDemo() {
     var input = document.getElementById('thai-input');
     var btn = document.getElementById('thai-transliterate');
-    var thaiOut = document.getElementById('thai-output');
+    var primaryOut = document.getElementById('thai-output');
+    var primaryLabel = document.getElementById('primary-label');
     var output = document.getElementById('rtgs-output');
+    var rtgsBlock = document.getElementById('rtgs-block');
     var area = document.getElementById('result-area');
     var speakBtn = document.getElementById('thai-speak');
-    if (!input || !btn || !output || !area) return;
+    if (!input || !btn || !output || !area || !primaryOut) return;
 
     var cfg = window.TR_SITE || {};
     var apiUrl = cfg.rtgsApiUrl || RTGS_API_DEFAULT;
     var canSpeak = typeof window.speechSynthesis !== 'undefined';
-    var lastThai = '';
+    var lastSpeakText = '';
+    var lastSpeakLang = 'th-TH';
     var thaiVoice = null;
+    var enVoice = null;
 
-    function pickThaiVoice() {
+    function pickVoice(langPrefix, nameHint) {
       if (!canSpeak) return null;
       var voices = window.speechSynthesis.getVoices() || [];
+      var re = new RegExp('^' + langPrefix + '(-|$)', 'i');
       return (
-        voices.find(function (v) { return /^th(-|$)/i.test(v.lang); }) ||
-        voices.find(function (v) { return /thai/i.test(v.name); }) ||
+        voices.find(function (v) { return re.test(v.lang); }) ||
+        (nameHint ? voices.find(function (v) { return nameHint.test(v.name); }) : null) ||
         null
       );
     }
 
+    function refreshVoices() {
+      thaiVoice = pickVoice('th', /thai/i);
+      enVoice = pickVoice('en', null);
+    }
+
     if (canSpeak) {
-      thaiVoice = pickThaiVoice();
-      window.speechSynthesis.onvoiceschanged = function () {
-        thaiVoice = pickThaiVoice();
-      };
+      refreshVoices();
+      window.speechSynthesis.onvoiceschanged = refreshVoices;
     }
 
     function stopSpeech() {
       if (canSpeak) window.speechSynthesis.cancel();
     }
 
-    function speakThai(text) {
+    function speakText(text, lang) {
       if (!canSpeak || !text) return;
       stopSpeech();
       var u = new SpeechSynthesisUtterance(text);
-      u.lang = 'th-TH';
+      u.lang = lang || 'th-TH';
       u.rate = 0.92;
-      if (!thaiVoice) thaiVoice = pickThaiVoice();
-      if (thaiVoice) u.voice = thaiVoice;
+      if (lang && lang.indexOf('th') === 0) {
+        if (!thaiVoice) thaiVoice = pickVoice('th', /thai/i);
+        if (thaiVoice) u.voice = thaiVoice;
+      } else {
+        if (!enVoice) enVoice = pickVoice('en', null);
+        if (enVoice) u.voice = enVoice;
+      }
       window.speechSynthesis.speak(u);
     }
 
     function setSpeakVisible(show) {
       if (!speakBtn) return;
       speakBtn.hidden = !(canSpeak && show);
+    }
+
+    function setFieldValue(el, value, readOnly) {
+      if (!el) return;
+      if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
+        el.value = value;
+        el.readOnly = !!readOnly;
+      } else {
+        el.textContent = value;
+      }
+    }
+
+    function applyDirection(direction) {
+      var thToEn = direction === 'th_to_en';
+      if (primaryLabel) {
+        primaryLabel.textContent = t(
+          thToEn ? 'home.tryEnglishLabel' : 'home.tryThaiLabel',
+          currentLang()
+        ) || (thToEn ? 'English' : 'Thai');
+      }
+      if (primaryOut) {
+        primaryOut.lang = thToEn ? 'en' : 'th';
+        primaryOut.classList.toggle('is-english', thToEn);
+      }
+      if (rtgsBlock) rtgsBlock.hidden = thToEn;
     }
 
     function run() {
@@ -155,19 +193,17 @@
       }
 
       stopSpeech();
-      lastThai = '';
+      lastSpeakText = '';
+      lastSpeakLang = 'th-TH';
       setSpeakVisible(false);
+      if (rtgsBlock) rtgsBlock.hidden = false;
+      if (primaryLabel) {
+        primaryLabel.textContent = t('home.tryThaiLabel', currentLang()) || 'Thai';
+      }
 
       var processing = t('home.tryProcessing', currentLang()) || 'Processing…';
-      if (thaiOut) thaiOut.textContent = processing;
-      if (output) {
-        if (output.tagName === 'TEXTAREA' || output.tagName === 'INPUT') {
-          output.value = processing;
-          output.readOnly = true;
-        } else {
-          output.textContent = processing;
-        }
-      }
+      primaryOut.textContent = processing;
+      setFieldValue(output, processing, true);
       area.hidden = false;
       btn.disabled = true;
 
@@ -178,35 +214,38 @@
         })
         .then(function (data) {
           var err = t('home.tryError', currentLang()) || 'Error';
+          var direction = (data && data.direction) || 'en_to_th';
           var thai = (data && data.thai) ? data.thai : '';
+          var english = (data && data.english) ? data.english : '';
           var rtgs = (data && data.rtgs) ? data.rtgs : '';
-          if (thaiOut) thaiOut.textContent = thai || err;
-          if (output) {
-            var shown = rtgs || err;
-            if (output.tagName === 'TEXTAREA' || output.tagName === 'INPUT') {
-              output.value = shown;
-              output.readOnly = !rtgs;
-            } else {
-              output.textContent = shown;
+
+          applyDirection(direction);
+
+          if (direction === 'th_to_en') {
+            primaryOut.textContent = english || err;
+            setFieldValue(output, '', true);
+            if (english) {
+              lastSpeakText = english;
+              lastSpeakLang = 'en-US';
+              setSpeakVisible(true);
+              speakText(english, 'en-US');
             }
-          }
-          if (thai && rtgs) {
-            lastThai = thai;
-            setSpeakVisible(true);
-            speakThai(thai);
+          } else {
+            primaryOut.textContent = thai || err;
+            setFieldValue(output, rtgs || err, !rtgs);
+            if (thai && rtgs) {
+              lastSpeakText = thai;
+              lastSpeakLang = 'th-TH';
+              setSpeakVisible(true);
+              speakText(thai, 'th-TH');
+            }
           }
         })
         .catch(function () {
           var err = t('home.tryError', currentLang()) || 'Could not reach the engine. Try again.';
-          if (thaiOut) thaiOut.textContent = err;
-          if (output) {
-            if (output.tagName === 'TEXTAREA' || output.tagName === 'INPUT') {
-              output.value = err;
-              output.readOnly = true;
-            } else {
-              output.textContent = err;
-            }
-          }
+          primaryOut.textContent = err;
+          setFieldValue(output, err, true);
+          if (rtgsBlock) rtgsBlock.hidden = false;
           setSpeakVisible(false);
         })
         .then(function () {
@@ -223,7 +262,7 @@
     });
     if (speakBtn) {
       speakBtn.addEventListener('click', function () {
-        if (lastThai) speakThai(lastThai);
+        if (lastSpeakText) speakText(lastSpeakText, lastSpeakLang);
       });
     }
   }

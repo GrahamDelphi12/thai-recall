@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thai Recall — Free evaluation Android app to recall &amp; speak Thai</title>
   <meta name="description" content="Thai Recall is an Android app for expats and immersed learners: look up the Thai phrase you need, hear it in one earbud, say it, and stay in the conversation. Free evaluation. iOS and Windows planned.">
-  <link rel="stylesheet" href="styles.css?v=20260819e">
+  <link rel="stylesheet" href="styles.css?v=20260819f">
   <link rel="icon" href="assets/app-icon.png">
 </head>
 <body data-page="home">
@@ -163,7 +163,7 @@
         <p class="eyebrow" data-i18n="home.tryEyebrow">Live engine</p>
         <h2 data-i18n="home.tryH">Try it out</h2>
         <p class="lead" data-i18n="home.tryLead">
-          Type an English phrase (or Thai). Hear the Thai, then keep the RTGS as-is — or reshape it to match how you say it.
+          Type English to get Thai + RTGS (hear Thai). Type Thai to get the English translation (hear English).
         </p>
         <div class="try-layout">
           <div class="try-demo" id="thairecall-demo">
@@ -178,19 +178,21 @@
             <div class="try-result" id="result-area" hidden>
               <div class="try-thai-row">
                 <div>
-                  <p class="try-result-label" data-i18n="home.tryThaiLabel">Thai</p>
+                  <p class="try-result-label" id="primary-label" data-i18n="home.tryThaiLabel">Thai</p>
                   <p class="try-result-thai" id="thai-output" lang="th"></p>
                 </div>
                 <button type="button" class="btn btn-ink try-speak" id="thai-speak" hidden data-i18n="home.trySpeak">
                   Hear it
                 </button>
               </div>
-              <label class="try-result-label" for="rtgs-output" data-i18n="home.tryResultLabel">Precision RTGS — editable</label>
-              <textarea id="rtgs-output" class="try-rtgs-edit" rows="2" spellcheck="false"
-                        data-i18n-placeholder="home.tryEditHint"
-                        placeholder="Edit to match how you hear and say it"
-                        aria-live="polite"></textarea>
-              <p class="try-edit-note" data-i18n="home.tryEditNote">Same as in the app: save the spelling that helps you speak under pressure.</p>
+              <div id="rtgs-block">
+                <label class="try-result-label" for="rtgs-output" id="rtgs-label" data-i18n="home.tryResultLabel">Precision RTGS — editable</label>
+                <textarea id="rtgs-output" class="try-rtgs-edit" rows="2" spellcheck="false"
+                          data-i18n-placeholder="home.tryEditHint"
+                          placeholder="Edit to match how you hear and say it"
+                          aria-live="polite"></textarea>
+                <p class="try-edit-note" id="rtgs-note" data-i18n="home.tryEditNote">Same as in the app: save the spelling that helps you speak under pressure.</p>
+              </div>
             </div>
           </div>
           <aside class="try-aside stack">
@@ -253,7 +255,7 @@
   </footer>
 
   <script src="site-config.js?v=20260819c"></script>
-  <script src="i18n.js?v=20260819e"></script>
-  <script src="site.js?v=20260819e"></script>
+  <script src="i18n.js?v=20260819f"></script>
+  <script src="site.js?v=20260819f"></script>
 </body>
 </html>

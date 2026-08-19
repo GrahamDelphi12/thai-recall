@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thai Recall — Free evaluation Android app to recall &amp; speak Thai</title>
   <meta name="description" content="Thai Recall is an Android app for expats and immersed learners: look up the Thai phrase you need, hear it in one earbud, say it, and stay in the conversation. Free evaluation. iOS and Windows planned.">
-  <link rel="stylesheet" href="styles.css?v=20260812d">
+  <link rel="stylesheet" href="styles.css?v=20260819e">
   <link rel="icon" href="assets/app-icon.png">
 </head>
 <body data-page="home">
@@ -19,6 +19,7 @@
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-i18n="nav.menu">Menu</button>
       <ul class="nav-links" id="nav-menu">
         <li><a href="index.html" class="is-active" aria-current="page" data-i18n="nav.home">Home</a></li>
+        <li><a href="#try-it-out" data-i18n="nav.try">Try it out</a></li>
         <li><a href="how-it-works.html" data-i18n="nav.how">How it works</a></li>
         <li><a href="pedagogy.html" data-i18n="nav.pedagogy">Pedagogy</a></li>
         <li><a href="about.html" data-i18n="nav.about">About</a></li>
@@ -157,6 +158,57 @@
       </div>
     </section>
 
+    <section class="section try-section" id="try-it-out">
+      <div class="wrap reveal">
+        <p class="eyebrow" data-i18n="home.tryEyebrow">Live engine</p>
+        <h2 data-i18n="home.tryH">Try it out</h2>
+        <p class="lead" data-i18n="home.tryLead">
+          Type an English phrase (or Thai). Hear the Thai, then keep the RTGS as-is — or reshape it to match how you say it.
+        </p>
+        <div class="try-layout">
+          <div class="try-demo" id="thairecall-demo">
+            <label class="try-label" for="thai-input" data-i18n="home.tryLabel">English or Thai</label>
+            <input type="text" id="thai-input" class="try-input"
+                   data-i18n-placeholder="home.tryPlaceholder"
+                   placeholder="e.g. train station or สถานีรถไฟ"
+                   autocomplete="off" spellcheck="false" inputmode="text">
+            <button type="button" class="btn btn-primary try-btn" id="thai-transliterate" data-i18n="home.tryBtn">
+              Look up now
+            </button>
+            <div class="try-result" id="result-area" hidden>
+              <div class="try-thai-row">
+                <div>
+                  <p class="try-result-label" data-i18n="home.tryThaiLabel">Thai</p>
+                  <p class="try-result-thai" id="thai-output" lang="th"></p>
+                </div>
+                <button type="button" class="btn btn-ink try-speak" id="thai-speak" hidden data-i18n="home.trySpeak">
+                  Hear it
+                </button>
+              </div>
+              <label class="try-result-label" for="rtgs-output" data-i18n="home.tryResultLabel">Precision RTGS — editable</label>
+              <textarea id="rtgs-output" class="try-rtgs-edit" rows="2" spellcheck="false"
+                        data-i18n-placeholder="home.tryEditHint"
+                        placeholder="Edit to match how you hear and say it"
+                        aria-live="polite"></textarea>
+              <p class="try-edit-note" data-i18n="home.tryEditNote">Same as in the app: save the spelling that helps you speak under pressure.</p>
+            </div>
+          </div>
+          <aside class="try-aside stack">
+            <h3 data-i18n="home.tryCustomH">Make the sound yours</h3>
+            <p data-i18n="home.tryCustomP1">
+              Moving from Thai script into Latin letters is never a perfect one-to-one map. Official RTGS gives a precise, shareable start — but your ear may prefer sa-tha-nee over sathani, or a space that marks a breath you actually take when speaking.
+            </p>
+            <p data-i18n="home.tryCustomP2">
+              In Thai Recall you can edit the transliteration before you save a phrase. That small customisation is pedagogical: the cue you rehearse is the cue you will retrieve when the conversation is already moving. Ownership of the sound form speeds noticing, memory, and real-time production.
+            </p>
+            <p data-i18n="home.tryCustomP3">
+              Use the engine’s RTGS directly, or reshape it to your style — both are valid paths to speaking Thai faster.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="wrap about reveal">
         <div class="about-photo">
@@ -200,7 +252,8 @@
     </p>
   </footer>
 
-  <script src="i18n.js?v=20260812b"></script>
-  <script src="site.js?v=20260812b"></script>
+  <script src="site-config.js?v=20260819c"></script>
+  <script src="i18n.js?v=20260819e"></script>
+  <script src="site.js?v=20260819e"></script>
 </body>
 </html>

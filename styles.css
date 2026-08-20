@@ -1097,10 +1097,26 @@ h1, h2, h3 {
   margin-bottom: 0.75rem;
 }
 
-.notice ul {
-  margin-left: 1.1rem;
+.policy-body ul {
+  margin: 0.35rem 0 0.75rem 1.15rem;
   color: var(--muted);
 }
+
+.policy-body li + li {
+  margin-top: 0.65rem;
+}
+
+.policy-body h2 {
+  font-size: 1.35rem;
+  margin-top: 0.5rem;
+}
+
+.policy-site-link {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
 
 .notice li + li {
   margin-top: 0.55rem;

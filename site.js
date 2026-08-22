@@ -391,16 +391,26 @@
         return;
       }
 
-      if (passwordGateOn && !isUnlocked()) {
-        if (gate) gate.hidden = false;
-        lockApkDownload({});
+      // Friend builds: password + Android both required
+      if (passwordGateOn) {
+        if (!onAndroid) {
+          if (gate) gate.hidden = true;
+          lockApkDownload({ showAndroidNote: true });
+          return;
+        }
+        if (!isUnlocked()) {
+          if (gate) gate.hidden = false;
+          lockApkDownload({});
+          return;
+        }
+        if (gate) gate.hidden = true;
+        enableApkDownload();
         return;
       }
 
       if (gate) gate.hidden = true;
 
-      // Soft Android gate only when no friend password is configured
-      if (!passwordGateOn && !onAndroid) {
+      if (!onAndroid) {
         lockApkDownload({ showAndroidNote: true });
         return;
       }

@@ -320,7 +320,93 @@
     var androidNote = document.getElementById('android-only-note');
     var apkVer = document.getElementById('apk-version');
     var install = document.getElementById('apk-install');
+    var gate = document.getElementById('apk-gate');
+    var gateInput = document.getElementById('apk-password');
+    var gateBtn = document.getElementById('apk-unlock');
+    var gateError = document.getElementById('apk-gate-error');
     var onAndroid = isAndroidDevice();
+    var GATE_KEY = 'tr-apk-unlocked';
+    var requiredPassword = (cfg.apkDownloadPassword || '').trim();
+    var passwordGateOn = !!requiredPassword;
+
+    function isUnlocked() {
+      if (!passwordGateOn) return true;
+      try {
+        return sessionStorage.getItem(GATE_KEY) === '1';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function setUnlocked(ok) {
+      try {
+        if (ok) sessionStorage.setItem(GATE_KEY, '1');
+        else sessionStorage.removeItem(GATE_KEY);
+      } catch (e) { /* ignore */ }
+    }
+
+    function enableApkDownload() {
+      if (!apk || !cfg.apkUrl) return;
+      apk.setAttribute('href', cfg.apkUrl);
+      if (cfg.apkUrl.indexOf('http') === 0) {
+        apk.removeAttribute('download');
+      } else {
+        apk.setAttribute('download', 'ThaiRecall.apk');
+      }
+      setDisabled(apk, false);
+      if (apkNote) apkNote.hidden = true;
+      if (androidNote) androidNote.hidden = true;
+      if (install) install.hidden = false;
+      if (apkVer) {
+        if (cfg.apkVersionLabel) {
+          apkVer.hidden = false;
+          apkVer.textContent = (t('dl.apkVer', currentLang()) || 'APK version') + ': ' + cfg.apkVersionLabel;
+        } else {
+          apkVer.hidden = true;
+        }
+      }
+    }
+
+    function lockApkDownload(opts) {
+      opts = opts || {};
+      if (!apk) return;
+      setDisabled(apk, true);
+      apk.removeAttribute('href');
+      apk.removeAttribute('download');
+      if (apkNote) apkNote.hidden = !opts.showApkNote;
+      if (androidNote) androidNote.hidden = !opts.showAndroidNote;
+      if (install) install.hidden = true;
+      if (apkVer) apkVer.hidden = true;
+    }
+
+    function refreshApkUi() {
+      var maintenance = document.getElementById('download-maintenance');
+      if (maintenance) maintenance.hidden = !!cfg.apkReady;
+
+      if (!apk || !cfg.apkUrl) return;
+
+      if (!cfg.apkReady) {
+        if (gate) gate.hidden = true;
+        lockApkDownload({ showApkNote: true });
+        return;
+      }
+
+      if (passwordGateOn && !isUnlocked()) {
+        if (gate) gate.hidden = false;
+        lockApkDownload({});
+        return;
+      }
+
+      if (gate) gate.hidden = true;
+
+      // Soft Android gate only when no friend password is configured
+      if (!passwordGateOn && !onAndroid) {
+        lockApkDownload({ showAndroidNote: true });
+        return;
+      }
+
+      enableApkDownload();
+    }
 
     if (play && cfg.playStoreUrl) {
       play.setAttribute('href', cfg.playStoreUrl);
@@ -333,50 +419,30 @@
       }
     }
 
-    if (apk && cfg.apkUrl) {
-      apk.setAttribute('href', cfg.apkUrl);
-      if (cfg.apkUrl.indexOf('http') === 0) {
-        apk.removeAttribute('download');
-      } else {
-        apk.setAttribute('download', 'ThaiRecall.apk');
-      }
-
-      var maintenance = document.getElementById('download-maintenance');
-      if (maintenance) maintenance.hidden = !!cfg.apkReady;
-
-      if (!cfg.apkReady) {
-        setDisabled(apk, true);
-        apk.removeAttribute('href');
-        apk.removeAttribute('download');
-        if (apkNote) apkNote.hidden = false;
-        if (androidNote) androidNote.hidden = true;
-        if (install) install.hidden = true;
-        if (apkVer) apkVer.hidden = true;
-      } else if (!onAndroid) {
-        // Soft gate: hide/disable APK UI off Android. Direct URL can still be fetched;
-        // real paywall needs a store (Gumroad/Lemon Squeezy/Play).
-        setDisabled(apk, true);
-        apk.removeAttribute('href');
-        apk.removeAttribute('download');
-        if (apkNote) apkNote.hidden = true;
-        if (androidNote) androidNote.hidden = false;
-        if (install) install.hidden = true;
-        if (apkVer) apkVer.hidden = true;
-      } else {
-        setDisabled(apk, false);
-        if (apkNote) apkNote.hidden = true;
-        if (androidNote) androidNote.hidden = true;
-        if (install) install.hidden = false;
-        if (apkVer) {
-          if (cfg.apkVersionLabel) {
-            apkVer.hidden = false;
-            apkVer.textContent = (t('dl.apkVer', currentLang()) || 'APK version') + ': ' + cfg.apkVersionLabel;
-          } else {
-            apkVer.hidden = true;
-          }
+    if (gateBtn && gateInput) {
+      function tryUnlock() {
+        var entered = (gateInput.value || '').trim();
+        if (entered === requiredPassword) {
+          setUnlocked(true);
+          if (gateError) gateError.hidden = true;
+          gateInput.value = '';
+          refreshApkUi();
+        } else {
+          setUnlocked(false);
+          if (gateError) gateError.hidden = false;
+          lockApkDownload({});
         }
       }
+      gateBtn.addEventListener('click', tryUnlock);
+      gateInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          tryUnlock();
+        }
+      });
     }
+
+    refreshApkUi();
   }
 
   document.addEventListener('DOMContentLoaded', function () {

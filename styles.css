@@ -488,6 +488,47 @@ html[lang="th"] blockquote {
   align-items: center;
 }
 
+.apk-gate {
+  margin: 0.85rem 0 1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--mist);
+}
+
+.apk-gate[hidden] {
+  display: none !important;
+}
+
+.apk-gate-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.apk-gate-input {
+  flex: 1 1 160px;
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+.apk-gate .btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  flex-shrink: 0;
+}
+
+.apk-gate-error {
+  color: var(--lacquer) !important;
+  margin-top: 0.55rem;
+}
+
+.apk-gate-error[hidden] {
+  display: none !important;
+}
+
 .download-note[hidden],
 #apk-install[hidden],
 #download-maintenance[hidden] {

@@ -1053,6 +1053,34 @@ h1, h2, h3 {
   color: var(--muted);
 }
 
+.ped-sr {
+  margin-top: 2.75rem;
+  padding: 1.75rem 1.5rem 1.85rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(196, 163, 90, 0.22), transparent 45%),
+    var(--mist);
+}
+
+.ped-sr .lead {
+  margin-bottom: 0.85rem;
+}
+
+.ped-sr p {
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.ped-sr p + p {
+  margin-top: 0.85rem;
+}
+
+.ped-sr h2 {
+  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
+  margin-bottom: 0.75rem;
+}
+
 /* Download */
 .download-maintenance {
   display: grid;

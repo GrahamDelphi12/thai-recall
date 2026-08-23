@@ -12,7 +12,7 @@ window.TR_SITE = {
      Optional soft gate: set apkDownloadPassword (empty string = no prompt). */
   apkUrl: 'downloads/ThaiRecall.apk',
   apkReady: true,
-  apkVersionLabel: '22 Aug 2026',
+  apkVersionLabel: '23 Aug 2026 · v1.27',
   apkDownloadPassword: 'ThaiRecall',
 
   /* Live RTGS demo (Try it out) — Cloud Run. Redeploy with CORS + EN→TH for production. */

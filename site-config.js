@@ -15,9 +15,10 @@ window.TR_SITE = {
   apkVersionLabel: '23 Aug 2026 · v1.27',
   apkDownloadPassword: 'ThaiRecall',
 
-  /* Live RTGS demo (Try it out) — Cloud Run. Redeploy with CORS + EN→TH for production. */
-  rtgsApiUrl: 'https://thairecall-rtgs-74012798523.us-central1.run.app/rtgs',
-  /* Local engine (dev only):
+  /* Live RTGS demo (Try it out) — website Cloud Run (NOT the Android app service). */
+  rtgsApiUrl: 'https://thairecall-rtgs-web-74012798523.us-central1.run.app/rtgs',
+  /* Android app uses: https://thairecall-rtgs-74012798523.us-central1.run.app/rtgs
+     Local engine (dev only):
      rtgsApiUrl: 'http://127.0.0.1:8080/rtgs', */
 
   supportEmail: 'support@thairecall.com',

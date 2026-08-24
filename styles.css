@@ -794,12 +794,38 @@ h1, h2, h3 {
   box-shadow: 0 0 0 3px rgba(165, 25, 49, 0.15);
 }
 
+.try-input-error {
+  margin: -0.35rem 0 0.75rem;
+  font-size: 0.88rem;
+  color: var(--lacquer);
+  line-height: 1.4;
+}
+
+.try-input-error[hidden] {
+  display: none !important;
+}
+
+.try-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
 .try-btn {
-  width: 100%;
+  flex: 1 1 140px;
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
   border-radius: 10px;
+}
+
+.try-clear {
+  flex: 0 0 auto;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  border-radius: 10px;
+  padding: 0.85rem 1.15rem;
 }
 
 .try-btn:disabled {

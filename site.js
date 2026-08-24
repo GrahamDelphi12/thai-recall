@@ -98,6 +98,8 @@
   function wireTryDemo() {
     var input = document.getElementById('thai-input');
     var btn = document.getElementById('thai-transliterate');
+    var clearBtn = document.getElementById('thai-clear');
+    var inputError = document.getElementById('try-input-error');
     var primaryOut = document.getElementById('thai-output');
     var primaryLabel = document.getElementById('primary-label');
     var output = document.getElementById('rtgs-output');
@@ -170,6 +172,55 @@
       }
     }
 
+    function showInputError(msg) {
+      if (!inputError) return;
+      if (!msg) {
+        inputError.hidden = true;
+        inputError.textContent = '';
+        return;
+      }
+      inputError.textContent = msg;
+      inputError.hidden = false;
+    }
+
+    function isPlausibleLookup(text) {
+      var s = (text || '').trim();
+      if (s.length < 2 || s.length > 120) return false;
+
+      // Reject punctuation / digits / symbols only
+      if (!/[\u0E00-\u0E7Fa-zA-Z]/.test(s)) return false;
+
+      var thaiChars = (s.match(/[\u0E00-\u0E7F]/g) || []).join('');
+      if (thaiChars.length >= 2) {
+        // Thai path: enough Thai script, not mostly noise
+        if (thaiChars.length < s.replace(/\s/g, '').length * 0.5 && /[a-zA-Z]{4,}/.test(s)) {
+          return false;
+        }
+        if (/(.)\1{3,}/.test(thaiChars)) return false;
+        return true;
+      }
+
+      // English / Latin path
+      var letters = s.replace(/[^a-zA-Z]/g, '');
+      if (letters.length < 2) return false;
+      if (/(.)\1{3,}/i.test(letters)) return false;
+
+      var lower = letters.toLowerCase();
+      if (/qwerty|asdfgh|zxcvbn|qazwsx|abcdefg|aoeuidhtns/.test(lower)) return false;
+
+      var words = s.toLowerCase().match(/[a-z]{2,}/g) || [];
+      if (!words.length) return false;
+
+      var withVowel = words.filter(function (w) { return /[aeiouy]/.test(w); });
+      if (!withVowel.length) return false;
+      if (withVowel.length / words.length < 0.5) return false;
+
+      // Long consonant clusters without vowels look like mash
+      if (/[bcdfghjklmnpqrstvwxz]{6,}/i.test(letters)) return false;
+
+      return true;
+    }
+
     function applyDirection(direction) {
       var thToEn = direction === 'th_to_en';
       if (primaryLabel) {
@@ -185,9 +236,36 @@
       if (rtgsBlock) rtgsBlock.hidden = thToEn;
     }
 
+    function clearAll() {
+      stopSpeech();
+      lastSpeakText = '';
+      lastSpeakLang = 'th-TH';
+      setSpeakVisible(false);
+      showInputError('');
+      input.value = '';
+      primaryOut.textContent = '';
+      setFieldValue(output, '', true);
+      if (rtgsBlock) rtgsBlock.hidden = false;
+      if (primaryLabel) {
+        primaryLabel.textContent = t('home.tryThaiLabel', currentLang()) || 'Thai';
+      }
+      area.hidden = true;
+      input.focus();
+    }
+
     function run() {
       var text = (input.value || '').trim();
+      showInputError('');
       if (!text) {
+        input.focus();
+        return;
+      }
+
+      if (!isPlausibleLookup(text)) {
+        showInputError(t('home.tryInvalid', currentLang()) || 'Please enter a real English phrase or Thai text.');
+        area.hidden = true;
+        stopSpeech();
+        setSpeakVisible(false);
         input.focus();
         return;
       }
@@ -254,6 +332,10 @@
     }
 
     btn.addEventListener('click', run);
+    if (clearBtn) clearBtn.addEventListener('click', clearAll);
+    input.addEventListener('input', function () {
+      if (inputError && !inputError.hidden) showInputError('');
+    });
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();

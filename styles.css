@@ -390,24 +390,71 @@ html[lang="th"] blockquote {
   text-transform: uppercase;
   color: var(--lacquer);
   font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.clarity-buy .amount {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  color: var(--ink);
-  line-height: 1;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
 }
 
 .clarity-buy ul {
-  margin: 1rem 0 1.25rem 1.1rem;
+  margin: 0 0 1.25rem 1.1rem;
   color: var(--muted);
 }
 
 .clarity-buy li + li {
   margin-top: 0.35rem;
+}
+
+.clarity-price-link {
+  margin-top: 0.85rem;
+  font-size: 0.92rem;
+}
+
+.clarity-price-link a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.clarity-price-link a:hover {
+  color: var(--lacquer);
+}
+
+.price-section .price-plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.price-plans article {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+  background: var(--paper, #fff);
+}
+
+.price-plans h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.55rem;
+  color: var(--ink);
+}
+
+.price-plans .plan-main {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  color: var(--lacquer);
+  margin: 0 0 0.25rem;
+  line-height: 1.15;
+}
+
+.price-plans .plan-alt {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 640px) {
+  .price-section .price-plans {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1426,3 +1473,5 @@ h1, h2, h3 {
     margin-right: auto;
   }
 }
+
+#pricing { scroll-margin-top: 5.5rem; }

@@ -738,6 +738,36 @@ h1, h2, h3 {
   text-align: center;
 }
 
+.app-clip {
+  margin: 2.75rem auto 0;
+  max-width: 320px;
+}
+
+.phone-frame--video {
+  padding: 0.55rem;
+}
+
+.phone-frame--video video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  background: #0b0d12;
+  vertical-align: middle;
+}
+
+.app-clip-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.app-clip-caption strong {
+  color: var(--ink);
+  font-weight: 650;
+  font-size: 1rem;
+}
+
 /* Try it out — live RTGS demo */
 .try-section {
   background:

@@ -12,7 +12,7 @@ window.TR_SITE = {
      Optional soft gate: set apkDownloadPassword (empty string = no prompt). */
   apkUrl: 'downloads/ThaiRecall.apk',
   apkReady: true,
-  apkVersionLabel: '25 Aug 2026 · v1.31',
+  apkVersionLabel: '26 Aug 2026 · v1.31-unlimited',
   apkDownloadPassword: 'ThaiRecall',
 
   /* Live RTGS demo (Try it out) — website Cloud Run (NOT the Android app service). */
@@ -21,6 +21,6 @@ window.TR_SITE = {
      Local engine (dev only):
      rtgsApiUrl: 'http://127.0.0.1:8080/rtgs', */
 
-  supportEmail: 'support@thairecall.com',
+  supportEmail: 'graborn.dev@gmail.com',
   customDomain: 'thairecall.com'
 };

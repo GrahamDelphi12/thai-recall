@@ -350,11 +350,15 @@
   }
 
   function wireReveal() {
-    var nodes = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
+    var nodes = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (!nodes.length) return;
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
       nodes.forEach(function (n) { n.classList.add('visible'); });
       return;
     }
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -362,8 +366,36 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    }, {
+      // Generous bottom margin so last sections reveal before iOS rubber-band bounce
+      threshold: 0.08,
+      rootMargin: '0px 0px 20% 0px'
+    });
+
+    function revealRemaining() {
+      nodes.forEach(function (n) {
+        if (!n.classList.contains('visible')) {
+          n.classList.add('visible');
+          io.unobserve(n);
+        }
+      });
+    }
+
     nodes.forEach(function (n) { io.observe(n); });
+
+    // Debounced near-bottom pass: iPhone overscroll can leave the final block half-stuck
+    var bottomTimer = null;
+    function onScrollOrResize() {
+      if (bottomTimer) clearTimeout(bottomTimer);
+      bottomTimer = setTimeout(function () {
+        var doc = document.documentElement;
+        var remaining = doc.scrollHeight - window.innerHeight - window.scrollY;
+        if (remaining < 160) revealRemaining();
+      }, 80);
+    }
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+    onScrollOrResize();
   }
 
   function isAndroidDevice() {

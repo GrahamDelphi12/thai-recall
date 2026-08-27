@@ -59,6 +59,17 @@
       var descVal = t(descKey, lang);
       var meta = document.querySelector('meta[name="description"]');
       if (meta && descVal) meta.setAttribute('content', descVal);
+
+      function setMetaBySel(sel, attr, val) {
+        if (!val) return;
+        var el = document.querySelector(sel);
+        if (el) el.setAttribute(attr, val);
+      }
+      setMetaBySel('meta[property="og:title"]', 'content', titleVal);
+      setMetaBySel('meta[property="og:description"]', 'content', descVal);
+      setMetaBySel('meta[name="twitter:title"]', 'content', titleVal);
+      setMetaBySel('meta[name="twitter:description"]', 'content', descVal);
+      setMetaBySel('meta[property="og:locale"]', 'content', lang === 'th' ? 'th_TH' : 'en_GB');
     }
 
     document.querySelectorAll('[data-set-lang]').forEach(function (btn) {

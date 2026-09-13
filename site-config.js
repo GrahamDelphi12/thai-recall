@@ -10,9 +10,9 @@ window.TR_SITE = {
      Friend testing: set apkReady: true, commit + push (or test locally).
      Public pause: set apkReady: false. Play Store remains preferred.
      Optional soft gate: set apkDownloadPassword (empty string = no prompt). */
-  apkUrl: 'downloads/ThaiRecall.apk?v=20260830b',
+  apkUrl: 'downloads/ThaiRecall.apk?v=20260913',
   apkReady: true,
-  apkVersionLabel: '30 Aug 2026 · v1.33-unlimited · pm',
+  apkVersionLabel: '13 Sep 2026 · v1.38-unlimited',
   apkDownloadPassword: 'ThaiRecall',
 
   /* Live RTGS demo (Try it out) — website Cloud Run (NOT the Android app service). */

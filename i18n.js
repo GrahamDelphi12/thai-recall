@@ -30,7 +30,6 @@ window.TR_I18N = {
     'home.productTag': 'Android now · iOS & Windows planned',
     'home.heroLine': 'Recall the Thai phrase. Say it. Stay in the conversation.',
     'home.heroSupport': 'Thai Recall is not a full translator. It is a conversation companion for people who already know some Thai — look up the missing phrase, hear it in one earbud, speak it, and keep talking.',
-    'home.ctaApp': 'Get the app',
     'home.ctaWhat': 'What you get',
     'home.sellEyebrow': 'What is this?',
     'home.sellH': 'An Android app that helps you speak Thai in real life.',
@@ -41,8 +40,6 @@ window.TR_I18N = {
     'home.buy2': 'Listen & speak with one earbud',
     'home.buy3': 'Curated packs + your own saves',
     'home.buy4': 'Spaced Repetition practice',
-    'home.buyCta': 'Go to download',
-    'home.priceLink': 'See pricing',
     'home.flowSearch': 'Search',
     'home.flowSearchD': 'Find the phrase you almost know.',
     'home.flowListen': 'Listen',
@@ -95,7 +92,6 @@ window.TR_I18N = {
     'home.footerBio': 'Designed by an MEd Educational Technology & ELT alumnus (University of Manchester). Curated for authentic local Thai delivery.',
     'home.footerLinks': '© 2026 Thai Recall ·',
     'footer.privacy': 'Privacy',
-    'footer.download': 'Download',
 
     'how.eyebrow': 'The science of speed',
     'how.h1': 'From missing word to spoken phrase',
@@ -110,7 +106,6 @@ window.TR_I18N = {
     'how.s4p': 'Favourites and spaced repetition bring phrases back when memory needs work. Retrieval practice moves language from “I know it somewhere” to “I can say it now.”',
     'how.cap1': 'Lookup · ready to Speak',
     'how.cap2': 'Reconstruct a memory challenge',
-    'how.cta': 'Download Thai Recall',
     'how.footer': '© 2026 ·',
     'how.home': 'Home',
 
@@ -160,7 +155,6 @@ window.TR_I18N = {
     'about.built': 'What he built',
     'about.builtP': 'Thai Recall treats language as situational stock phrases you can look up, hear through a single earbud, speak immediately, save, and recall later. The guiding question for every feature:',
     'about.guide': 'Does this help the user stay in the conversation?',
-    'about.ctaApp': 'Download the app',
     'about.ctaContact': 'Contact',
     'about.support': 'Support:',
 
@@ -287,7 +281,6 @@ window.TR_I18N = {
     'home.productTag': 'แอนดรอยด์พร้อมใช้ · มีแผน iOS และ Windows',
     'home.heroLine': 'นึกวลีไทยได้ พูดออกไป อยู่กับบทสนทนาต่อ',
     'home.heroSupport': 'Thai Recall ไม่ใช่ตัวแปลทั้งบทสนทนา แต่เป็นเพื่อนคู่ใจสำหรับคนที่รู้ไทยอยู่บ้าง — ค้นหาวลีที่ขาด ฟังในหูฟังข้างเดียว พูดตาม แล้วคุยต่อได้',
-    'home.ctaApp': 'ดาวน์โหลดแอป',
     'home.ctaWhat': 'ได้อะไรบ้าง',
     'home.sellEyebrow': 'นี่คืออะไร?',
     'home.sellH': 'แอปแอนดรอยด์ที่ช่วยให้พูดไทยได้ในชีวิตจริง',
@@ -298,8 +291,6 @@ window.TR_I18N = {
     'home.buy2': 'ฟังและพูดด้วยหูฟังข้างเดียว',
     'home.buy3': 'ชุดที่คัดสรร + วลีที่คุณบันทึกเอง',
     'home.buy4': 'ฝึกทบทวนแบบเว้นระยะ',
-    'home.buyCta': 'ไปหน้าดาวน์โหลด',
-    'home.priceLink': 'ดูราคา',
     'home.flowSearch': 'ค้นหา',
     'home.flowSearchD': 'เจอวลีที่คุณเกือบจะนึกออก',
     'home.flowListen': 'ฟัง',
@@ -352,7 +343,6 @@ window.TR_I18N = {
     'home.footerBio': 'ออกแบบโดยศิษย์เก่า MEd เทคโนโลยีการศึกษา & ELT (มหาวิทยาลัยแมนเชสเตอร์) คัดสรรเพื่อการพูดไทยที่สมจริง',
     'home.footerLinks': '© 2026 Thai Recall ·',
     'footer.privacy': 'ความเป็นส่วนตัว',
-    'footer.download': 'ดาวน์โหลด',
 
     'how.eyebrow': 'วิทยาศาสตร์ของความเร็ว',
     'how.h1': 'จากคำที่นึกไม่ออก สู่ประโยคที่พูดได้',
@@ -367,7 +357,6 @@ window.TR_I18N = {
     'how.s4p': 'รายการโปรดและการทบทวนแบบเว้นระยะดึงวลีกลับมาเมื่อความจำต้องการงาน การเรียกคืนช่วยย้ายภาษาจาก “รู้ซักที่” เป็น “พูดได้ตอนนี้”',
     'how.cap1': 'ค้นหา · พร้อมกดพูด',
     'how.cap2': 'ประกอบประโยคในแบบทดสอบความจำ',
-    'how.cta': 'ดาวน์โหลด Thai Recall',
     'how.footer': '© 2026 ·',
     'how.home': 'หน้าแรก',
 
@@ -417,7 +406,6 @@ window.TR_I18N = {
     'about.built': 'สิ่งที่เขาสร้าง',
     'about.builtP': 'Thai Recall มองภาษาเป็นวลีสำเร็จรูปตามสถานการณ์ ที่ค้นหาได้ ฟังผ่านหูฟังข้างเดียว พูดทันที บันทึก และทบทวนภายหลัง คำถามนำทุกฟีเจอร์คือ:',
     'about.guide': 'สิ่งนี้ช่วยให้ผู้ใช้อยู่ในบทสนทนาต่อหรือไม่?',
-    'about.ctaApp': 'ดาวน์โหลดแอป',
     'about.ctaContact': 'ติดต่อ',
     'about.support': 'ฝ่ายสนับสนุน:',
 

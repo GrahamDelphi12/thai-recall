@@ -409,27 +409,12 @@ html[lang="th"] blockquote {
 }
 
 .clarity-buy ul {
-  margin: 0 0 1.25rem 1.1rem;
+  margin: 0 0 0 1.1rem;
   color: var(--muted);
 }
 
 .clarity-buy li + li {
   margin-top: 0.35rem;
-}
-
-.clarity-price-link {
-  margin-top: 0.85rem;
-  font-size: 0.92rem;
-}
-
-.clarity-price-link a {
-  color: var(--muted);
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-}
-
-.clarity-price-link a:hover {
-  color: var(--lacquer);
 }
 
 .price-section .price-plans {

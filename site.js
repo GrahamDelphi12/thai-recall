@@ -50,6 +50,13 @@
       if (val != null) el.setAttribute('placeholder', val);
     });
 
+    document.querySelectorAll('[data-src-en][data-src-th]').forEach(function (el) {
+      var src = el.getAttribute(lang === 'th' ? 'data-src-th' : 'data-src-en');
+      if (!src) return;
+      if (el.tagName === 'VIDEO') el.setAttribute('poster', src);
+      else el.setAttribute('src', src);
+    });
+
     var page = document.body.getAttribute('data-page');
     if (page) {
       var titleKey = 'meta.' + page + '.title';

@@ -444,6 +444,8 @@
   }
 
   function wireDownloadLinks() {
+    /* APK sideload UI is commented out in download.html while Play is live.
+       To re-enable: uncomment APK markup, restore apkUrl / apkReady in site-config.js. */
     var cfg = window.TR_SITE || {};
     var play = document.getElementById('btn-play');
     var apk = document.getElementById('btn-apk');

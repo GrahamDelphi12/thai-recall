@@ -544,6 +544,14 @@ a.hero-product:focus-visible {
   align-items: center;
 }
 
+.download-try {
+  margin-top: 0.85rem;
+  max-width: 44ch;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
 .apk-gate {
   margin: 0.85rem 0 1rem;
   padding: 1rem 1.05rem;

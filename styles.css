@@ -369,7 +369,16 @@ html[lang="th"] blockquote {
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.04em;
+  text-decoration: none;
   animation: rise 0.9s 0.04s var(--ease) both;
+}
+
+a.hero-product:hover,
+a.hero-product:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+  outline: none;
 }
 
 .clarity {
